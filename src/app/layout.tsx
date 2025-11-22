@@ -23,9 +23,9 @@ const parkinsans = Parkinsans({
 });
 
 export const metadata: Metadata = {
-  title: "CodeGuide Starter Kit",
+  title: "RiseClean",
   description:
-    "A modern Next.js starter with TypeScript, TailwindCSS, shadcn/ui, Vercel AI SDK, Clerk, and Supabase",
+    "Platform edukasi kebersihan berbasis web yang bertujuan meningkatkan partisipasi masyarakat dalam pengelolaan sampah melalui pendekatan gamifikasi",
 };
 
 export default function RootLayout({
@@ -37,7 +37,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${geistSans.className} ${geistMono.className} ${parkinsans.className} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} ${parkinsans.variable} antialiased`}
         >
           <ThemeProvider
             attribute="class"

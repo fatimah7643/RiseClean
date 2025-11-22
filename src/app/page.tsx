@@ -1,161 +1,296 @@
 "use client";
 
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import Chat from "@/components/chat";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import MainLayout from "@/components/main-layout";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
-  CheckCircle,
-  Zap,
-  Database,
+  BookOpen,
+  Target,
+  TrendingUp,
   Shield,
-  ExternalLink,
+  Lightbulb,
+  Leaf,
+  Recycle,
+  Users,
+  Award,
+  Coins
 } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
+  // Mock data for educational materials
+  const educationalMaterials = [
+    {
+      id: 1,
+      title: "Jenis Plastik dan Pemilahan",
+      description: "Pelajari jenis-jenis plastik dan cara memilahnya dengan benar",
+      points: 10,
+      icon: Recycle,
+    },
+    {
+      id: 2,
+      title: "Dampak Sampah terhadap Lingkungan",
+      description: "Kenali dampak buruk dari penanganan sampah yang tidak tepat",
+      points: 15,
+      icon: Leaf,
+    },
+    {
+      id: 3,
+      title: "Manfaat Bank Sampah",
+      description: "Temukan manfaat dari mengelola sampah melalui Bank Sampah",
+      points: 12,
+      icon: Users,
+    },
+  ];
+
+  // Mock data for daily challenges
+  const dailyChallenges = [
+    {
+      id: 1,
+      title: "Pisahkan Sampah Organik dan Anorganik",
+      description: "Pisahkan sampah rumah tangga Anda hari ini",
+      points: 20,
+      difficulty: "easy",
+    },
+    {
+      id: 2,
+      title: "Jual ke Bank Sampah",
+      description: "Bawa sampah yang sudah dipilah ke Bank Sampah terdekat",
+      points: 50,
+      difficulty: "medium",
+    },
+    {
+      id: 3,
+      title: "Edukasi Tetangga",
+      description: "Ajak tetangga Anda untuk memilah sampah",
+      points: 30,
+      difficulty: "medium",
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      {/* Hero Section */}
-      <div className="text-center py-12 sm:py-16 relative px-4">
-        <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <ThemeToggle />
-            <SignedOut>
-              <SignInButton>
-                <Button size="sm" className="text-xs sm:text-sm">
-                  Sign In
-                </Button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+    <MainLayout>
+      <div className="container mx-auto px-4 py-6">
+        {/* Welcome Section */}
+        <div className="mb-8 text-center">
+          <div className="inline-flex items-center space-x-2 bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 px-4 py-2 rounded-full mb-4">
+            <Leaf className="w-4 h-4" />
+            <span className="text-sm font-medium">Sampah menjadi Berkah</span>
           </div>
-        </div>
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-4">
-          <Image
-            src="/codeguide-logo.png"
-            alt="CodeGuide Logo"
-            width={50}
-            height={50}
-            className="rounded-xl sm:w-[60px] sm:h-[60px]"
-          />
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent">
-            CodeGuide Starter
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-500 bg-clip-text text-transparent mb-2">
+            Selamat Datang di RiseClean
           </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Platform edukasi kebersihan berbasis web yang bertujuan meningkatkan partisipasi masyarakat dalam pengelolaan sampah melalui pendekatan gamifikasi.
+          </p>
         </div>
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
-          Build faster with your AI coding agent
-        </p>
+
+        {/* Stats Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <Card className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200 dark:border-green-800">
+            <CardContent className="p-4 flex items-center">
+              <div className="bg-green-500 p-3 rounded-lg mr-4">
+                <Coins className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Poin Anda</p>
+                <p className="text-2xl font-bold">125</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border-blue-200 dark:border-blue-800">
+            <CardContent className="p-4 flex items-center">
+              <div className="bg-blue-500 p-3 rounded-lg mr-4">
+                <Award className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Pencapaian</p>
+                <p className="text-2xl font-bold">3</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-amber-200 dark:border-amber-800">
+            <CardContent className="p-4 flex items-center">
+              <div className="bg-amber-500 p-3 rounded-lg mr-4">
+                <Target className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Tantangan</p>
+                <p className="text-2xl font-bold">7</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border-emerald-200 dark:border-emerald-800">
+            <CardContent className="p-4 flex items-center">
+              <div className="bg-emerald-500 p-3 rounded-lg mr-4">
+                <Recycle className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Hari Hijau</p>
+                <p className="text-2xl font-bold">12</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Educational Materials */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold flex items-center">
+              <BookOpen className="w-5 h-5 mr-2 text-green-600" />
+              Materi Edukasi
+            </h2>
+            <Link href="/education" className="text-sm text-green-600 hover:underline">
+              Lihat Semua
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {educationalMaterials.map((material) => {
+              const IconComponent = material.icon;
+              return (
+                <Card key={material.id} className="hover:shadow-md transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg">
+                        <IconComponent className="w-5 h-5 text-green-600" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-lg">{material.title}</CardTitle>
+                        <div className="flex items-center mt-1">
+                          <Badge variant="secondary" className="bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300">
+                            +{material.points} poin
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-4">{material.description}</p>
+                    <div className="flex justify-between items-center">
+                      <Link href={`/education/${material.id}`}>
+                        <Button size="sm" className="bg-green-500 hover:bg-green-600">
+                          Baca Sekarang
+                        </Button>
+                      </Link>
+                      <Badge variant="outline" className="text-xs">Belum Selesai</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Daily Challenges */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold flex items-center">
+              <Target className="w-5 h-5 mr-2 text-amber-600" />
+              Tantangan Harian
+            </h2>
+            <Link href="/challenges" className="text-sm text-amber-600 hover:underline">
+              Lihat Semua
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {dailyChallenges.map((challenge) => (
+              <Card key={challenge.id} className="hover:shadow-md transition-shadow">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center justify-between">
+                    <span>{challenge.title}</span>
+                    <Badge
+                      variant="outline"
+                      className={
+                        challenge.difficulty === "easy"
+                          ? "border-green-200 text-green-700 dark:text-green-300"
+                          : challenge.difficulty === "medium"
+                            ? "border-amber-200 text-amber-700 dark:text-amber-300"
+                            : "border-red-200 text-red-700 dark:text-red-300"
+                      }
+                    >
+                      {challenge.difficulty === "easy" ? "Mudah" :
+                       challenge.difficulty === "medium" ? "Sedang" : "Sulit"}
+                    </Badge>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-4">{challenge.description}</p>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center">
+                      <Coins className="w-4 h-4 text-amber-500 mr-1" />
+                      <span className="font-medium">+{challenge.points} poin</span>
+                    </div>
+                    <Button size="sm" className="bg-amber-500 hover:bg-amber-600">
+                      Ambil Tantangan
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Community Impact */}
+        <div className="mb-8">
+          <h2 className="text-xl font-bold mb-4 flex items-center">
+            <Users className="w-5 h-5 mr-2 text-blue-600" />
+            Dampak Komunitas
+          </h2>
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex flex-col md:flex-row items-center">
+                <div className="flex-1 mb-4 md:mb-0 md:pr-6">
+                  <h3 className="text-lg font-semibold mb-2">Bersama Kita Wujudkan Lingkungan Lebih Bersih</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Setiap tindakan kecil Anda berkontribusi pada perubahan besar bagi lingkungan.
+                    Bergabunglah dengan ribuan pengguna lain yang peduli lingkungan.
+                  </p>
+                  <div className="flex space-x-6">
+                    <div>
+                      <p className="text-2xl font-bold text-green-600">1.250+</p>
+                      <p className="text-sm text-muted-foreground">Pengguna Aktif</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-amber-600">5.6 ton</p>
+                      <p className="text-sm text-muted-foreground">Sampah Terkelola</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-blue-600">45</p>
+                      <p className="text-sm text-muted-foreground">Bank Sampah</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-6 w-full md:w-auto">
+                  <div className="flex items-center justify-center">
+                    <Lightbulb className="w-16 h-16 text-green-500" />
+                  </div>
+                  <p className="text-center mt-2 font-medium">Mulai dari diri sendiri, ubah lingkungan sekitar</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Sign in message for unauthenticated users */}
+        <SignedOut>
+          <div className="text-center py-8">
+            <h2 className="text-2xl font-bold mb-2">Bergabunglah dengan Kami</h2>
+            <p className="text-muted-foreground mb-4">Bantu lingkungan dengan pengelolaan sampah yang baik</p>
+            <SignInButton>
+              <Button size="lg" className="bg-green-500 hover:bg-green-600">
+                Daftar Sekarang
+              </Button>
+            </SignInButton>
+          </div>
+        </SignedOut>
       </div>
-
-      <main className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-8 max-w-5xl">
-        <div className="text-center mb-8">
-          <div className="text-4xl sm:text-5xl mb-2">⚠️</div>
-          <div className="font-bold text-lg sm:text-xl mb-1">Setup Required</div>
-          <div className="text-sm sm:text-base text-muted-foreground">
-            Add environment variables to get started
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-          {/* Clerk */}
-          <div className="text-center p-3 sm:p-4 rounded-lg bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10">
-            <div className="flex justify-center mb-3">
-              <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-blue-500" />
-            </div>
-            <div className="font-semibold mb-2 text-sm sm:text-base">
-              Clerk Auth
-            </div>
-            <div className="text-xs text-muted-foreground mb-2">
-              <div className="font-mono bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded mb-1">NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY</div>
-              <div className="font-mono bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded">CLERK_SECRET_KEY</div>
-            </div>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() =>
-                window.open("https://dashboard.clerk.com", "_blank")
-              }
-              className="w-full text-xs sm:text-sm"
-            >
-              <ExternalLink className="w-3 h-3 mr-1" />
-              Dashboard
-            </Button>
-          </div>
-
-          {/* Supabase */}
-          <div className="text-center p-3 sm:p-4 rounded-lg bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/10 dark:to-emerald-900/10">
-            <div className="flex justify-center mb-3">
-              <Database className="w-6 h-6 sm:w-8 sm:h-8 text-green-500" />
-            </div>
-            <div className="font-semibold mb-2 text-sm sm:text-base">
-              Supabase DB
-            </div>
-            <div className="text-xs text-muted-foreground mb-2">
-              <div className="font-mono bg-green-100 dark:bg-green-800 px-2 py-1 rounded mb-1">NEXT_PUBLIC_SUPABASE_URL</div>
-              <div className="font-mono bg-green-100 dark:bg-green-800 px-2 py-1 rounded">NEXT_PUBLIC_SUPABASE_ANON_KEY</div>
-            </div>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() =>
-                window.open("https://supabase.com/dashboard", "_blank")
-              }
-              className="w-full text-xs sm:text-sm"
-            >
-              <ExternalLink className="w-3 h-3 mr-1" />
-              Dashboard
-            </Button>
-          </div>
-
-          {/* AI */}
-          <div className="text-center p-3 sm:p-4 rounded-lg bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/10 dark:to-pink-900/10 sm:col-span-2 md:col-span-1">
-            <div className="flex justify-center mb-3">
-              <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-purple-500" />
-            </div>
-            <div className="font-semibold mb-2 text-sm sm:text-base">
-              AI SDK
-            </div>
-            <div className="text-xs text-muted-foreground mb-2">
-              <div className="font-mono bg-purple-100 dark:bg-purple-800 px-2 py-1 rounded mb-1">OPENAI_API_KEY</div>
-              <div className="font-mono bg-purple-100 dark:bg-purple-800 px-2 py-1 rounded">ANTHROPIC_API_KEY</div>
-            </div>
-            <div className="grid grid-cols-2 gap-1 sm:gap-2">
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() =>
-                  window.open("https://platform.openai.com", "_blank")
-                }
-                className="text-xs px-1 sm:px-2"
-              >
-                OpenAI
-              </Button>
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() =>
-                  window.open("https://console.anthropic.com", "_blank")
-                }
-                className="text-xs px-1 sm:px-2"
-              >
-                Anthropic
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Chat Section */}
-        <SignedIn>
-          <div className="mt-6 sm:mt-8">
-            <Chat />
-          </div>
-        </SignedIn>
-      </main>
-    </div>
+    </MainLayout>
   );
 }
