@@ -72,7 +72,7 @@ export default function MainLayout({
           <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-1 text-sm bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-2 py-1 rounded-full">
               <Coins className="w-4 h-4" />
-              <span>{user?.publicMetadata.points || 0}</span>
+              <span>{(user?.publicMetadata as any)?.points ?? 0}</span>
             </div>
             <UserButton />
 
@@ -193,7 +193,7 @@ export default function MainLayout({
 
                 <div className="mt-2 flex items-center space-x-2 bg-white/20 text-white px-2 py-1 rounded-full text-sm">
                   <Coins className="w-4 h-4" />
-                  <span>{user?.publicMetadata.points || 0} Poin</span>
+                  <span>{(user?.publicMetadata as any)?.points ?? 0}</span>
                 </div>
               </div>
             </div>
